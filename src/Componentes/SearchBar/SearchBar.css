@@ -1,0 +1,20 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 90px;
+  }
+  
+  .search-bar input {
+    width: 250px; 
+    padding: 10px 40px 10px 10px; 
+    border: none; /* Sin borde */
+    border-radius: 5px; 
+    font-size: 16px; 
+    outline: none; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .search-bar input::placeholder {
+    color: #ccc; 
+    opacity: 0.8; 
+  }

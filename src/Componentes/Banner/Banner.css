@@ -1,0 +1,84 @@
+.mySwiper {
+    height: 600px; 
+    width: 100%; 
+  }
+  .banner-container {
+    position: relative; 
+  }
+  .banner-slide {
+    position: relative;
+  }
+  
+  .banner-image {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+  }
+  
+  .banner-content {
+    position: absolute;
+    bottom: 20px; 
+    left: 20px; 
+    color: white; 
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 10px; 
+    border-radius: 5px; 
+    max-width: 50%; 
+  }
+  
+  .banner-content h2 {
+    margin: 0;
+    font-size: 24px; 
+    font-weight: bold;
+  }
+  
+  .rating {
+    margin-top: 5px; 
+    font-size: 16px; 
+    color: #ffd700; 
+    border: 4px black;
+  }
+  .search-icon {
+    position: absolute; 
+    bottom: 500px; 
+    left: 30px; 
+    color: blue; /* Color inicial */
+    font-size: 24px; 
+    cursor: pointer;
+    z-index: 10; 
+    height: 80px;
+    width: 70px;
+    border: 4px black;
+    transition: color 0.3s ease; 
+  }
+  
+  .search-icon:hover {
+    color:gray; 
+  }
+  .search-bar {
+    position: absolute; 
+    top: 60px; 
+    left: 20px; 
+    display: flex;
+    align-items: center; 
+  }
+  
+  .search-bar input {
+    width: 250px; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    margin-left: 80px;
+    margin-top: -190px;
+  }
+  
+  .search-bar input::placeholder {
+    color: #ccc; 
+    opacity: 0.8; 
+  }
+.custom-star-ratings{
+  margin-left: 0px;
+}  

@@ -1,0 +1,50 @@
+
+.movie-card {
+    display: grid;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px;
+    transition: transform 0.2s;
+    width: 280px; /* Ancho fijo, puedes ajustarlo */
+    height: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 22%;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .movie-card__image {
+    width: 100%;
+    height: 110%;
+  }
+  
+  .movie-card__info {
+    padding: 16px;
+    background-color: #fff;
+  }
+  
+  .titulo {
+    font-size: 1.2em;
+    text-align: center;
+  }
+  
+  
+  .movie-card__overview {
+    color: #555; /* Color del texto de la descripción */
+    font-size: 0.9em; /* Tamaño de fuente para la descripción */
+    margin-top: 8px; /* Espacio encima de la descripción */
+    max-height: 60px; /* Altura máxima para mantener el diseño */
+    overflow: hidden; /* Oculta el desbordamiento */
+    text-overflow: ellipsis; /* Agrega "..." al final si es muy largo */
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; /* Orientación vertical */
+  }
+  .star-rating{
+    margin-left: 70px;
+  }

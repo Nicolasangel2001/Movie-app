@@ -1,0 +1,84 @@
+.container {
+    background-color: black; 
+    color: white; 
+    padding: 20px; 
+    border-radius: 0px; 
+  }
+  
+  .movie-info {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+  }
+  
+  .img-movie {
+    width: 500px; 
+    border-radius: 8px;
+    margin-right: 20px; 
+  }
+ 
+  
+  .actor-banner {
+    margin-top: 20px;
+  }
+  
+  .banner-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .actor-scroll {
+    display: flex;
+    overflow-x: auto; 
+    padding: 10px 0; 
+  }
+  
+  .scroll-button {
+    background-color: #a7dff9;
+    color:Black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0 10px; 
+  }
+  
+  .scroll-button:hover {
+    background-color: #00bfff; 
+  }
+  
+  .actor-card {
+    background-color: #a7dff9;
+    color: black;
+    border-radius: 5px;
+    padding: 0px;
+    text-align: center;
+    min-width: 150px; 
+    margin-right: 10px; 
+  }
+  
+  .actor-image {
+    width: 100%; 
+    border-radius: 0px;
+  }
+  
+  .actor-info {
+    margin-top: 5px;
+  }
+  .rating{
+    margin-left: 300px;
+  }
+  .custom-star-rating{
+    margin-left: 280px;
+  }
+  .movie-title{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .duration{
+    text-align: center;
+  }
+  .genero{
+    text-align: center;
+  }
