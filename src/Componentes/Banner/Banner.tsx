@@ -16,7 +16,7 @@ interface Movie {
 interface BannerProps {
   movies: Movie[];
   searchTerm: string;
-  setSearchTerm: (term: string) => void; // Prop para actualizar el término de búsqueda
+  setSearchTerm: (term: string) => void;
 }
 
 const Banner: React.FC<BannerProps> = ({ movies, searchTerm, setSearchTerm }) => {
@@ -25,6 +25,11 @@ const Banner: React.FC<BannerProps> = ({ movies, searchTerm, setSearchTerm }) =>
   const handleSearchClick = () => {
     setSearchInputVisible(!searchInputVisible); 
   };
+
+  // Si no hay películas, muestra un mensaje
+  if (!movies.length) {
+    return <div className="no-movies">No hay películas próximas a estrenar.</div>;
+  }
 
   return (
     <div className="banner-container">
@@ -50,22 +55,22 @@ const Banner: React.FC<BannerProps> = ({ movies, searchTerm, setSearchTerm }) =>
             <div className="banner-content">
               <h2>{movie.title}</h2>
               <div className="custom-star-ratings">
-  <StarRatings
-    rating={movie.vote_average / 2} // Divide entre 2 para adaptar a 5 estrellas
-    starRatedColor="gold"
-    numberOfStars={5}
-    name="rating"
-    starDimension="20px"
-    starSpacing="5px"
-  />
-</div>
+                <StarRatings
+                  rating={movie.vote_average / 2}
+                  starRatedColor="gold"
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="20px"
+                  starSpacing="5px"
+                />
+              </div>
             </div>
-            <FaSearch className="search-icon" onClick={handleSearchClick} /> {/* Icono de lupa con evento onClick */}
+            <FaSearch className="search-icon" onClick={handleSearchClick} />
             {searchInputVisible && (
               <SearchBar
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
-              /> 
+              />
             )}
           </SwiperSlide>
         ))}
@@ -75,3 +80,5 @@ const Banner: React.FC<BannerProps> = ({ movies, searchTerm, setSearchTerm }) =>
 };
 
 export default Banner;
+
+

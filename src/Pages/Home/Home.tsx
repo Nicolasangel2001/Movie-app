@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPopularMovies } from '../../API/tmdbApi';
+import { fetchAllMovies, fetchUpcomingMovies } from '../../API/tmdbApi'; 
 import Banner from '../../Componentes/Banner/Banner';
 import MovieCard from '../../Componentes/Moviecard/Moviecard';
 import Spinner from '../../Componentes/Spinner/Spinner';
 import NotFound from '../../Pages/NotFound/NotFound';
+import { useInView } from 'react-intersection-observer'; // Para lazy loading
 import './Home.css';
 
 interface Movie {
@@ -22,20 +23,30 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ setFilteredMovies, setSearchTerm }) => {
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
-  const [filteredMovies, setLocalFilteredMovies] = useState<Movie[]>([]); 
+  const [allMovies, setAllMovies] = useState<Movie[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<Movie[]>([]);
+  const [filteredMovies, setFilteredMoviesState] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setLocalSearchTerm] = useState<string>(''); 
+  const [searchTerm, setLocalSearchTerm] = useState<string>('');
+  const [page, setPage] = useState(1); // Para la paginación
 
-  // Fetch popular movies when component mounts
   useEffect(() => {
     const fetchMovies = async () => {
+      setLoading(true);
       try {
-        const movies = await fetchPopularMovies();
-        setPopularMovies(movies);
-        setLocalFilteredMovies(movies);
-        setFilteredMovies(movies); 
+        const movies = await fetchAllMovies(); // Obtener todas las películas
+        const upcoming = await fetchUpcomingMovies();
+        
+        setAllMovies(movies); // Almacena todas las películas
+        setUpcomingMovies(upcoming); // Almacena las próximas a estrenarse
+
+        // Filtra las películas populares excluyendo las próximas a estrenarse
+        const popularMovies = movies.filter(movie => 
+          !upcoming.some(upcomingMovie => upcomingMovie.id === movie.id)
+        );
+        
+        setFilteredMoviesState(popularMovies); // Inicialmente, se muestran las películas populares
       } catch (err) {
         console.error('Error fetching movies:', err);
         setError('No se pudieron cargar las películas.');
@@ -45,22 +56,60 @@ const Home: React.FC<HomeProps> = ({ setFilteredMovies, setSearchTerm }) => {
     };
 
     fetchMovies();
-  }, [setFilteredMovies]);
+  }, []);
 
   // Maneja el cambio de término de búsqueda y filtra las películas
   const handleSearchTermChange = (term: string) => {
-    setLocalSearchTerm(term); // Actualizar el término de búsqueda local
-    setSearchTerm(term); // Actualizar el término de búsqueda global
+    setLocalSearchTerm(term);
+    setSearchTerm(term);
 
-  
-    const filtered = popularMovies.filter(movie =>
-      movie.title.toLowerCase().includes(term.toLowerCase())
-    );
-    setLocalFilteredMovies(filtered); // Actualizar las películas filtradas localmente
-    setFilteredMovies(filtered); // Actualizar el estado global de las películas filtradas
+    if (term.trim() === '') {
+      // Si no hay búsqueda, muestra las películas populares (sin las próximas a estrenar)
+      const popularMovies = allMovies.filter(movie => 
+        !upcomingMovies.some(upcomingMovie => upcomingMovie.id === movie.id)
+      );
+      setFilteredMoviesState(popularMovies);
+    } else {
+      const filtered = allMovies.filter(movie =>
+        movie.title.toLowerCase().includes(term.toLowerCase()) &&
+        !upcomingMovies.some(upcomingMovie => upcomingMovie.id === movie.id) // Asegúrate de que no sea una película próxima
+      );
+      setFilteredMoviesState(filtered); // Actualiza las películas filtradas
+      setFilteredMovies(filtered); // Asegúrate de que el estado global también se actualice
+      setPage(1); // Resetea la página a 1 para evitar la carga de más películas
+    }
   };
 
-  if (loading) {
+  // Cargar más películas si es necesario
+  const { ref, inView } = useInView({
+    threshold: 0,
+    onChange: (inView) => {
+      if (inView && !loading && searchTerm.trim() === '') { // Solo carga más si no hay búsqueda
+        fetchMoreMovies();
+      }
+    },
+  });
+
+  const fetchMoreMovies = async () => {
+    setLoading(true); // Indica que se está cargando
+    try {
+      const newMovies = await fetchAllMovies(page);
+      const uniqueMovies = newMovies.filter(movie => 
+        !allMovies.some(existingMovie => existingMovie.id === movie.id) &&
+        !upcomingMovies.some(upcomingMovie => upcomingMovie.id === movie.id) // Asegúrate de que no sea una película próxima
+      );
+
+      setAllMovies(prev => [...prev, ...uniqueMovies]);
+      setFilteredMoviesState(prev => [...prev, ...uniqueMovies]);
+      setPage(prev => prev + 1); // Incrementa la página después de cargar más
+    } catch (err) {
+      console.error('Error fetching more movies:', err);
+    } finally {
+      setLoading(false); // Restablece el estado de carga
+    }
+  };
+
+  if (loading && filteredMovies.length === 0) {
     return (
       <div className="loader-container">
         <Spinner />
@@ -74,15 +123,13 @@ const Home: React.FC<HomeProps> = ({ setFilteredMovies, setSearchTerm }) => {
 
   return (
     <div>
-      
       <Banner 
-        movies={popularMovies} 
-        searchTerm={searchTerm} 
-        setSearchTerm={handleSearchTermChange} 
+        movies={upcomingMovies} // Pasamos las películas próximas al banner
+        searchTerm={searchTerm}
+        setSearchTerm={handleSearchTermChange}
       />
       
-     
-      <h2>{searchTerm ? `Resultados para "${searchTerm}"` : 'Películas Populares'}</h2>
+      <h2>{searchTerm ? `Resultados para "${searchTerm}"` : 'Peliculas Populares'}</h2>
       <div className="movie-grid">
         {filteredMovies.length > 0 ? (
           filteredMovies.map(movie => (
@@ -92,8 +139,12 @@ const Home: React.FC<HomeProps> = ({ setFilteredMovies, setSearchTerm }) => {
           <NotFound searchTerm={searchTerm} />
         )}
       </div>
+
+      {/* Referencia para lazy loading solo si no hay búsqueda */}
+      {searchTerm.trim() === '' && <div ref={ref} style={{ height: '20px' }} />}
     </div>
   );
 };
 
 export default Home;
+

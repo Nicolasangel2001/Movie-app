@@ -4,6 +4,7 @@ import StarRatings from 'react-star-ratings';
 import { fetchMovieDetails, fetchMovieCredits, Movie, Actor } from '../../API/tmdbApi';
 import './MovieDetails.css';
 import Spinner from '../../Componentes/Spinner/Spinner';
+import Default from '../../Image/Default.png';
 
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -86,14 +87,14 @@ const ActorBanner: React.FC<{ actors: Actor[] }> = ({ actors }) => {
 
   return (
     <div className="actor-banner">
-      <h3>Casting:</h3>
+      <h3>Cast:</h3>
       <div className="banner-container">
         <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
         <div className="actor-scroll" ref={scrollRef}>
           {actors.map((actor) => (
             <div key={actor.id} className="actor-card">
               <img
-                src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : 'default_image.jpg'} 
+                src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : Default} 
                 alt={actor.name}
                 className="actor-image"
               />

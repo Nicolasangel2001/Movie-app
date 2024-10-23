@@ -21,7 +21,7 @@ export interface Actor {
 
 // URL base y clave API desde el archivo .env
 const API_URL = 'https://api.themoviedb.org/3';
-const API_KEY = process.env.REACT_APP_TMDB_API_KEY || 'a04c62620dd07531dc22304fa49a9a09';
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
 // Función para obtener películas populares
 export const fetchPopularMovies = async (): Promise<Movie[]> => {
@@ -32,6 +32,43 @@ export const fetchPopularMovies = async (): Promise<Movie[]> => {
     return response.data.results; // Devolver la lista de películas populares
   } catch (error) {
     console.error('Error fetching popular movies:', error);
+    return []; // Devuelve un array vacío en caso de error
+  }
+};
+
+// Función para obtener películas en cartelera
+export const fetchNowPlayingMovies = async (): Promise<Movie[]> => {
+  try {
+    const response = await axios.get(`${API_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching now playing movies:', error);
+    throw error; // Lanzar error para manejarlo en el componente
+  }
+};
+
+// Función para obtener películas próximas a estrenar
+export const fetchUpcomingMovies = async (): Promise<Movie[]> => {
+  const url = `${API_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
+
+  try {
+    const response = await axios.get(url);
+    return response.data.results; // Devolver la lista de películas próximas a estrenar
+  } catch (error) {
+    console.error('Error fetching upcoming movies:', error);
+    return []; // Devuelve un array vacío en caso de error
+  }
+};
+
+// Función para obtener todas las películas
+export const fetchAllMovies = async (page = 1): Promise<Movie[]> => {
+  const url = `${API_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+
+  try {
+    const response = await axios.get(url);
+    return response.data.results; // Devolver la lista de películas
+  } catch (error) {
+    console.error('Error fetching all movies:', error);
     return []; // Devuelve un array vacío en caso de error
   }
 };
