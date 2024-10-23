@@ -20,7 +20,7 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   const navigate = useNavigate();
 
-  // Usa una imagen por defecto si backdrop_path es null o undefined
+
   const imgUrl = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
     : 'default_image.jpg'; 
