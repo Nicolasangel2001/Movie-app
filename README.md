@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# 🎬 MovieApp - Próximos Estrenos y Películas Populares
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción
 
-## Available Scripts
+MovieApp es una aplicación de una sola página (SPA) desarrollada en **React JS** que permite explorar las películas populares y próximas a estrenarse, consumiendo la API de **The Movie Database (TMDb)**. La aplicación presenta una interfaz atractiva y responsive, donde el usuario puede ver detalles de cada película, realizar búsquedas y navegar fácilmente por diferentes secciones.
 
-In the project directory, you can run:
+## Características
 
-### `npm start`
+- **Lista de Estrenos**: Banner con las películas próximas a estrenarse.
+- **Películas Populares**: Sección en formato de cuadrícula para explorar películas populares.
+- **Detalles de Película**: Visualización de la sinopsis, elenco, imágenes y calificación.
+- **Búsqueda**: Permite buscar películas por título.
+- **Paginación y Lazy Loading**: Mejora la experiencia de navegación y carga de películas.
+- **Responsive Design**: Adaptación a diferentes dispositivos con **CSS3** y media queries.
+  
+## Tecnologías Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React JS**: Biblioteca principal para crear la interfaz de usuario.
+- **React Router**: Para la navegación entre las diferentes secciones de la aplicación.
+- **Hooks de React**: Manejo del estado y efectos para consumir la API y gestionar los componentes.
+- **CSS3 y BEM**: Estilos de la aplicación con la metodología BEM para mantener un CSS modular y fácil de mantener.
+- **API de TMDb**: Consumo de datos de películas mediante solicitudes HTTP.
+- **Git y GitHub**: Control de versiones y despliegue del proyecto.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Estructura del proyecto
 
-### `npm test`
+### Pagina principal - Banner peliculas proximas a estrenar
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://github.com/user-attachments/assets/1a4fa487-79f8-466a-9f2c-b1ab56519c6f)
 
-### `npm run build`
+### Pagina principal - Peliculas populares con paginacion
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image](https://github.com/user-attachments/assets/faf91337-d3d4-4106-a317-0b037324a4d8)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Detalles de las peliculas
 
-### `npm run eject`
+![image](https://github.com/user-attachments/assets/7f039523-d42a-4f01-9e74-7b6d2ee55e85)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Busqueda de peliculas populares
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![image](https://github.com/user-attachments/assets/d67e16d8-e424-473f-8e84-dcbc5f1ca4cf)
+![image](https://github.com/user-attachments/assets/ed98e668-2b71-46fe-ab1a-f9d698f9973f)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### Error en la busqueda
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://github.com/user-attachments/assets/3bb46229-243d-4adc-a7f8-d8b3c59f6cee)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+
+
+
