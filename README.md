@@ -2,7 +2,8 @@
 
 ## Descripción
 
-MovieApp es una aplicación de una sola página (SPA) desarrollada en **React JS** que permite explorar las películas populares y próximas a estrenarse, consumiendo la API de **The Movie Database (TMDb)**. La aplicación presenta una interfaz atractiva y responsive, donde el usuario puede ver detalles de cada película, realizar búsquedas y navegar fácilmente por diferentes secciones.
+MovieApp es una aplicación de una sola página (SPA) desarrollada en React JS que permite explorar las películas populares y próximas a estrenarse, consumiendo la API de The Movie Database (TMDb). La aplicación presenta una interfaz atractiva y responsive, donde el usuario puede ver detalles de cada película y realizar búsquedas.
+
 
 ## Características
 
@@ -24,11 +25,11 @@ MovieApp es una aplicación de una sola página (SPA) desarrollada en **React JS
 
 ## Estructura del proyecto
 
-### Pagina principal - Banner peliculas proximas a estrenar
+### Pagina principal - Banner peliculas próximas a estrenar
 
 ![image](https://github.com/user-attachments/assets/1a4fa487-79f8-466a-9f2c-b1ab56519c6f)
 
-### Pagina principal - Peliculas populares con paginacion
+### Pagina principal - Películas populares con paginación
 
 ![image](https://github.com/user-attachments/assets/faf91337-d3d4-4106-a317-0b037324a4d8)
 
